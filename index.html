@@ -43,7 +43,7 @@
     }
     #banana {
       position: absolute;
-      width: 320px; /* Крупнее — почти от края до края круга */
+      width: 290px; /* на 30 пикселей меньше */
       height: auto;
       top: 50%;
       left: 50%;
@@ -53,34 +53,38 @@
       cursor: pointer;
     }
     .coffee {
-  position: fixed;
-  top: 10px;
-  left: 15px;
-  font-size: 24px;
-  z-index: 10;
-}
-.logo {
-  position: fixed;
-  top: 10px;
-  right: 15px;
-  z-index: 10;
-}
-.logo img {
-  width: 28px;
-  height: 28px;
-}
-
+      position: fixed;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      text-decoration: none;
+      z-index: 10;
+    }
+    .coffee a {
+      color: black;
+      text-decoration: none;
+    }
+    .logo {
+      position: fixed;
+      bottom: 10px;
+      right: 15px;
+      z-index: 10;
+    }
+    .logo img {
+      width: 28px;
+      height: 28px;
+    }
   </style>
 </head>
 <body>
   <div class="coffee">
-  <a href="https://www.buymeacoffee.com/indexmod" target="_blank">☕</a>
-</div>
-<div class="logo">
-  <a href="https://t.me/bananamusicclub" target="_blank">
-    <img src="/favicon/favicon-96x96.png" alt="Banana Logo" />
-  </a>
-</div>
+    <a href="https://www.buymeacoffee.com/indexmod" target="_blank">☕</a>
+  </div>
+  <div class="logo">
+    <a href="https://t.me/bananamusicclub" target="_blank">
+      <img src="/favicon/favicon-96x96.png" alt="Banana Logo" />
+    </a>
+  </div>
   <div class="dial" id="dial">
     <img id="banana" src="img/banana.png" alt="Banana Pointer" />
   </div>
