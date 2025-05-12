@@ -35,11 +35,17 @@
     }
     .number {
       position: absolute;
-      width: 30px;
-      height: 30px;
+      width: 36px;
+      height: 36px;
       text-align: center;
-      line-height: 30px;
+      line-height: 36px;
+      font-family: Garamond, serif;
+      font-size: 18px;
       font-weight: bold;
+      color: white;
+      border-radius: 50%;
+      background: hsl(calc(30 * var(--i)), 70%, 50%); /* 12 цветов */
+      transform: translate(-50%, -50%);
     }
     #banana {
       position: absolute;
@@ -118,8 +124,10 @@
       num.style.left = `${x}px`;
       num.style.top = `${y}px`;
       num.textContent = i;
+      num.style.setProperty('--i', i); // передаём номер для цвета
       dial.appendChild(num);
     }
+
 
     const audio = new Audio();
     dial.addEventListener('click', () => {
