@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Banana by Andr oDei" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <meta property="og:title" content="Banana Dial by Andr oDei" />
+  <meta property="og:description" content="Tap the banana to spin and play music from around the world: Russian, French, English, Chinese, Hebrew, Portuguese, Swedish, Turkish, Japanese, Hindi, German." />
+  <meta property="og:image" content="https://example.com/img/banana.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com" />
+  <title>Banana by Andr oDei</title>
+  <style>
+    body {
+      margin: 0;
+      background: #d62828;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+    .dial {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: white;
+    }
+    .number {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      font-weight: bold;
+    }
+    #banana {
+      position: absolute;
+      width: 320px; /* Крупнее — почти от края до края круга */
+      height: auto;
+      top: 50%;
+      left: 50%;
+      transform-origin: center center;
+      transform: translate(-50%, -50%) rotate(0deg);
+      transition: transform 0.6s ease;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="dial" id="dial">
+    <img id="banana" src="img/banana.png" alt="Banana Pointer" />
+  </div>
+  <script>
+    const dial = document.getElementById('dial');
+    const banana = document.getElementById('banana');
+    const total = 12;
+    let index = 0;
+
+    const trackNames = [
+      "Tri-Banana-russian",
+      "Le-Banana-Split-french",
+      "Go-Bananas-english",
+      "Big-Banana-chinese",
+      "Nana-Banana-hebrew",
+      "Give-That-Wolf-A-Banana-english",
+      "Bananeira-portuguese",
+      "Banansang-swedish",
+      "Monkey-Banana-turkish",
+      "Tondetta-Banana-japanese",
+      "Banana-Banana-hindi",
+      "Banana-Boat-Song-german"
+    ];
+
+    for (let i = 1; i <= total; i++) {
+      const angle = (i - 3) * (Math.PI * 2 / total);
+      const x = 185 + Math.cos(angle) * 160;
+      const y = 185 + Math.sin(angle) * 160;
+      const num = document.createElement('div');
+      num.className = 'number';
+      num.style.left = `${x}px`;
+      num.style.top = `${y}px`;
+      num.textContent = i;
+      dial.appendChild(num);
+    }
+
+    const audio = new Audio();
+    dial.addEventListener('click', () => {
+      index = (index % total) + 1;
+      const angle = (index - 1) * 30;
+      banana.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+      const fileName = `${String(index).padStart(2, '0')}-${trackNames[index - 1]}.m4a`;
+      audio.src = `audio/${fileName}`;
+      audio.play();
+    });
+  </script>
+</body>
+</html>
