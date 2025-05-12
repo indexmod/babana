@@ -35,16 +35,16 @@
     }
     .number {
       position: absolute;
-      width: 36px;
-      height: 36px;
+      width: 42px;
+      height: 42px;
       text-align: center;
-      line-height: 36px;
+      line-height: 42px;
       font-family: Garamond, serif;
-      font-size: 18px;
+      font-size: 22px;
       font-weight: bold;
-      color: white;
+      color: black; /* теперь чёрный */
       border-radius: 50%;
-      background: hsl(calc(30 * var(--i)), 70%, 50%); /* 12 цветов */
+      background: hsl(calc(30 * var(--i)), 70%, 60%);
       transform: translate(-50%, -50%);
     }
     #banana {
@@ -116,17 +116,21 @@
     ];
 
     for (let i = 1; i <= total; i++) {
-      const angle = (i - 3) * (Math.PI * 2 / total);
-      const x = 185 + Math.cos(angle) * 160;
-      const y = 185 + Math.sin(angle) * 160;
+      const angle = (i - 3) * (Math.PI * 2 / total); // -3 чтобы 12 была сверху
+      const radius = 170;
+      const centerX = 200;
+      const centerY = 200;
+      const x = centerX + Math.cos(angle) * radius;
+      const y = centerY + Math.sin(angle) * radius;
       const num = document.createElement('div');
       num.className = 'number';
       num.style.left = `${x}px`;
       num.style.top = `${y}px`;
       num.textContent = i;
-      num.style.setProperty('--i', i); // передаём номер для цвета
+      num.style.setProperty('--i', i); // для цветового круга hsl()
       dial.appendChild(num);
     }
+
 
 
     const audio = new Audio();
