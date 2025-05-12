@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="icon" href="/favicon/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Banana by Andr oDei" />
   <link rel="manifest" href="/favicon/site.webmanifest" />
   <meta property="og:title" content="Banana Rulette by Andr oDei" />
-  <meta property="og:description" content="Tap the banana to spin and play music from around the world: Russian, French, English, Chinese, Hebrew, Portuguese, Swedish, Turkish, Japanese, Hindi, German." />
+  <meta property="og:description" content="Tap the banana to spin and play music from around the world." />
   <meta property="og:image" content="http://banana.indexmod.xyz/cover.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="http://banana.indexmod.xyz/" />
@@ -21,15 +20,22 @@
       padding: 0;
       background: #d62828;
       font-family: sans-serif;
+      width: 100%;
       height: 100%;
-      overflow: hidden;
+      min-height: 100%;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
     }
 
-    body {
+    .wrapper {
+      position: relative;
+      max-width: 100vw;
+      max-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .dial {
@@ -72,7 +78,6 @@
       top: 10px;
       right: 15px;
       font-size: 24px;
-      text-decoration: none;
       z-index: 10;
     }
 
@@ -93,20 +98,17 @@
       height: 28px;
     }
 
-    /* Адаптация */
     @media (max-width: 768px) {
       .dial {
         width: 300px;
         height: 300px;
       }
-
       .number {
         font-size: 18px;
         width: 36px;
         height: 36px;
         line-height: 36px;
       }
-
       #banana {
         width: 160px;
       }
@@ -117,56 +119,30 @@
         width: 250px;
         height: 250px;
       }
-
       .number {
         display: none;
       }
-
       #banana {
         width: 140px;
       }
-
       .coffee {
         font-size: 20px;
         top: 5px;
         right: 10px;
       }
-
       .logo img {
         width: 24px;
         height: 24px;
       }
     }
-
-    .rotate-warning {
-      display: none;
-      position: absolute;
-      z-index: 1000;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #d62828;
-      color: white;
-      font-size: 20px;
-      font-weight: bold;
-      text-align: center;
-      padding-top: 40%;
-    }
-
-    @media screen and (orientation: portrait) and (max-width: 768px) {
-      .rotate-warning {
-        display: block;
-      }
-
-      body > *:not(.rotate-warning) {
-        display: none !important;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="rotate-warning">🔄 Поверни экран для запуска бананов!</div>
+  <div class="wrapper">
+    <div class="dial" id="dial">
+      <img id="banana" src="img/banana.png" alt="Banana Pointer" />
+    </div>
+  </div>
 
   <div class="coffee">
     <a href="https://www.buymeacoffee.com/indexmod" target="_blank">☕</a>
@@ -175,9 +151,6 @@
     <a href="https://t.me/bananamusicclub" target="_blank">
       <img src="/favicon/favicon-96x96.png" alt="Banana Logo" />
     </a>
-  </div>
-  <div class="dial" id="dial">
-    <img id="banana" src="img/banana.png" alt="Banana Pointer" />
   </div>
 
   <script>
