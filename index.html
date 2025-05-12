@@ -16,16 +16,22 @@
   <meta property="og:url" content="http://banana.indexmod.xyz/" />
   <title>Banana by Andr oDei</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       background: #d62828;
+      font-family: sans-serif;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      overflow: hidden;
-      font-family: sans-serif;
+      position: relative;
     }
+
     .dial {
       position: relative;
       width: 400px;
@@ -33,6 +39,7 @@
       border-radius: 50%;
       background: white;
     }
+
     .number {
       position: absolute;
       width: 42px;
@@ -47,6 +54,7 @@
       background: hsl(calc(30 * var(--i)), 70%, 60%);
       transform: translate(-50%, -50%);
     }
+
     #banana {
       position: absolute;
       width: 200px;
@@ -58,6 +66,7 @@
       transition: transform 0.6s ease;
       cursor: pointer;
     }
+
     .coffee {
       position: fixed;
       top: 10px;
@@ -66,22 +75,25 @@
       text-decoration: none;
       z-index: 10;
     }
+
     .coffee a {
       color: black;
       text-decoration: none;
     }
+
     .logo {
       position: fixed;
       bottom: 10px;
       right: 15px;
       z-index: 10;
     }
+
     .logo img {
       width: 28px;
       height: 28px;
     }
 
-    /* Адаптация для мобильных устройств */
+    /* Адаптация */
     @media (max-width: 768px) {
       .dial {
         width: 300px;
@@ -107,10 +119,7 @@
       }
 
       .number {
-        font-size: 14px;
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
+        display: none;
       }
 
       #banana {
@@ -128,9 +137,37 @@
         height: 24px;
       }
     }
+
+    .rotate-warning {
+      display: none;
+      position: absolute;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #d62828;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      padding-top: 40%;
+    }
+
+    @media screen and (orientation: portrait) and (max-width: 768px) {
+      .rotate-warning {
+        display: block;
+      }
+
+      body > *:not(.rotate-warning) {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="rotate-warning">🔄 Поверни экран для запуска бананов!</div>
+
   <div class="coffee">
     <a href="https://www.buymeacoffee.com/indexmod" target="_blank">☕</a>
   </div>
@@ -142,6 +179,7 @@
   <div class="dial" id="dial">
     <img id="banana" src="img/banana.png" alt="Banana Pointer" />
   </div>
+
   <script>
     const dial = document.getElementById('dial');
     const banana = document.getElementById('banana');
@@ -163,20 +201,24 @@
       "Banana-Boat-Song-german"
     ];
 
-    for (let i = 1; i <= total; i++) {
-      const angle = (i - 3) * (Math.PI * 2 / total); // -3 чтобы 12 была сверху
-      const radius = 170;
-      const centerX = 200;
-      const centerY = 200;
-      const x = centerX + Math.cos(angle) * radius;
-      const y = centerY + Math.sin(angle) * radius;
-      const num = document.createElement('div');
-      num.className = 'number';
-      num.style.left = `${x}px`;
-      num.style.top = `${y}px`;
-      num.textContent = i;
-      num.style.setProperty('--i', i); // для цветового круга hsl()
-      dial.appendChild(num);
+    const isMobile = window.innerWidth <= 480;
+
+    if (!isMobile) {
+      for (let i = 1; i <= total; i++) {
+        const angle = (i - 3) * (Math.PI * 2 / total);
+        const radius = 170;
+        const centerX = 200;
+        const centerY = 200;
+        const x = centerX + Math.cos(angle) * radius;
+        const y = centerY + Math.sin(angle) * radius;
+        const num = document.createElement('div');
+        num.className = 'number';
+        num.style.left = `${x}px`;
+        num.style.top = `${y}px`;
+        num.textContent = i;
+        num.style.setProperty('--i', i);
+        dial.appendChild(num);
+      }
     }
 
     const audio = new Audio();
