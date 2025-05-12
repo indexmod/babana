@@ -9,11 +9,11 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Banana by Andr oDei" />
   <link rel="manifest" href="/favicon/site.webmanifest" />
-<meta property="og:title" content="Banana Rulette by Andr oDei" />
-<meta property="og:description" content="Tap the banana to spin and play music from around the world: Russian, French, English, Chinese, Hebrew, Portuguese, Swedish, Turkish, Japanese, Hindi, German." />
-<meta property="og:image" content="http://banana.indexmod.xyz/cover.png" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://banana.indexmod.xyz/" />
+  <meta property="og:title" content="Banana Rulette by Andr oDei" />
+  <meta property="og:description" content="Tap the banana to spin and play music from around the world: Russian, French, English, Chinese, Hebrew, Portuguese, Swedish, Turkish, Japanese, Hindi, German." />
+  <meta property="og:image" content="http://banana.indexmod.xyz/cover.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://banana.indexmod.xyz/" />
   <title>Banana by Andr oDei</title>
   <style>
     body {
@@ -42,14 +42,14 @@
       font-family: Garamond, serif;
       font-size: 22px;
       font-weight: bold;
-      color: black; /* теперь чёрный */
+      color: black;
       border-radius: 50%;
       background: hsl(calc(30 * var(--i)), 70%, 60%);
       transform: translate(-50%, -50%);
     }
     #banana {
       position: absolute;
-      width: 200px; /* на 30 пикселей меньше */
+      width: 200px;
       height: auto;
       top: 50%;
       left: 50%;
@@ -79,6 +79,54 @@
     .logo img {
       width: 28px;
       height: 28px;
+    }
+
+    /* Адаптация для мобильных устройств */
+    @media (max-width: 768px) {
+      .dial {
+        width: 300px;
+        height: 300px;
+      }
+
+      .number {
+        font-size: 18px;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+      }
+
+      #banana {
+        width: 160px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .dial {
+        width: 250px;
+        height: 250px;
+      }
+
+      .number {
+        font-size: 14px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+      }
+
+      #banana {
+        width: 140px;
+      }
+
+      .coffee {
+        font-size: 20px;
+        top: 5px;
+        right: 10px;
+      }
+
+      .logo img {
+        width: 24px;
+        height: 24px;
+      }
     }
   </style>
 </head>
@@ -130,8 +178,6 @@
       num.style.setProperty('--i', i); // для цветового круга hsl()
       dial.appendChild(num);
     }
-
-
 
     const audio = new Audio();
     dial.addEventListener('click', () => {
